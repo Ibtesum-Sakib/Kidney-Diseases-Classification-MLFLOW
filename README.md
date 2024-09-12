@@ -81,6 +81,6 @@ MLflow
 
 DVC 
 
- - Its very lite weight for POC only
- - lite weight expriements tracker
+ - Its very light weight for POC only
+ - light weight expriements tracker
  - It can perform Orchestration (Creating Pipelines)
