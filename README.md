@@ -1,5 +1,7 @@
 # Kidney-Diseases-Classification-MLFLOW-DVC
-
+Utilized Continuous Integration/Continuous Deployment (CI/CD) workflows to automate model tracking, versioning, and deployment on AWS using EC2 and ECR.
+Cut down manual intervention by 40% with the integration of Docker and self-hosted runners for continuous deployment.
+Enhanced experiment tracking efficiency by 25% using MLFLOW for logging and managing model metadata.
 
 
 ## Workflows
