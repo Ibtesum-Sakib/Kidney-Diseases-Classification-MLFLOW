@@ -1,162 +1,180 @@
-# Kidney-Diseases-Classification-MLFLOW-DVC
-Utilized Continuous Integration/Continuous Deployment (CI/CD) workflows to automate model tracking, versioning, and deployment on AWS using EC2 and ECR.
-Cut down manual intervention by 40% with the integration of Docker and self-hosted runners for continuous deployment.
-Enhanced experiment tracking efficiency by 25% using MLFLOW for logging and managing model metadata.
+# 🩺 Kidney Disease Classification with MLflow, DVC & AWS
 
+An end-to-end **machine learning pipeline** for kidney disease classification that integrates **MLflow**, **DVC**, and **AWS** to automate model tracking, versioning, and deployment.  
+This project demonstrates how **MLOps practices** can enhance scalability, reproducibility, and automation in medical data analysis workflows.
 
-## Workflows
+---
 
-1. Update config.yaml
-2. Update secrets.yaml [Optional]
-3. Update params.yaml
-4. Update the entity
-5. Update the configuration manager in src config
-6. Update the components
-7. Update the pipeline 
-8. Update the main.py
-9. Update the dvc.yaml
-10. app.py
+## 🚀 Overview
 
-# How to run?
-### STEPS:
+- Utilized **Continuous Integration/Continuous Deployment (CI/CD)** workflows to automate model tracking, versioning, and deployment on **AWS (EC2 & ECR)**.  
+- Reduced manual intervention by **40%** through integration of **Docker** and **self-hosted GitHub runners** for continuous deployment.  
+- Enhanced experiment tracking efficiency by **25%** using **MLflow** for centralized logging and model metadata management.  
 
-Clone the repository
+---
 
+## ⚙️ Project Workflow
+
+1. Update `config.yaml`  
+2. Update `secrets.yaml` *(Optional)*  
+3. Update `params.yaml`  
+4. Update the entity  
+5. Update the configuration manager in `src/config`  
+6. Update the components  
+7. Update the pipeline  
+8. Update `main.py`  
+9. Update `dvc.yaml`  
+10. Run `app.py`
+
+---
+
+## 🧩 How to Run Locally
+
+### 1️⃣ Clone the Repository
 ```bash
-https://github.com/Ibtesum-Sakib/Kidney-Diseases-Classification-MLFLOW
+git clone https://github.com/Ibtesum-Sakib/Kidney-Diseases-Classification-MLFLOW.git
 ```
-### STEP 01- Create a conda environment after opening the repository
-
+### 2️⃣ Create a Conda Environment
 ```bash
 conda create -n cnncls python=3.8 -y
-```
-
-```bash
 conda activate cnncls
 ```
-
-
-### STEP 02- install the requirements
+### 3️⃣ Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
-
+### 4️⃣ Run the Application
 ```bash
-# Finally run the following command
 python app.py
 ```
 
-Now,
+Now, open your localhost and assign the port to access the app.
+
+### 📊 MLflow Integration
+
+MLflow is used for:
+
+Tracking and managing model experiments
+
+Logging metrics, parameters, and artifacts
+
+Enabling reproducibility and experiment comparison
+
+### 🔗 Resources
+
+MLflow Documentation
+
+MLflow Tutorial (YouTube)
+
+### 🧠 Useful Command
 ```bash
-open up you local host and port
+mlflow ui
+```
+### 📦 DVC Integration
+
+DVC (Data Version Control) manages data pipelines and ensures experiment reproducibility.
+
+Key Commands:
+```bash
+dvc init
+dvc repro
+dvc dag
 ```
 
-## MLflow
+DVC Features:
 
-- [Documentation](https://mlflow.org/docs/latest/index.html)
+Lightweight experiment tracking
 
-- [MLflow tutorial](https://youtu.be/qdcHHrsXA48?si=bD5vDS60akNphkem)
+Pipeline orchestration for data and model stages
 
-##### cmd
-- mlflow ui
+Ideal for Proof-of-Concept (POC) projects
 
-### dagshub
-[dagshub](https://dagshub.com/)
+Integration: DagsHub
 
+### ☁️ AWS CI/CD Deployment with GitHub Actions
+### 1️⃣ Login to AWS Console
+```bash
+Create an IAM user with required permissions.
+```
+### 2️⃣ IAM Permissions
 
+Grant access to:
 
-### DVC cmd
+EC2: Virtual machine hosting the deployment
 
-1. dvc init
-2. dvc repro
-3. dvc dag
+ECR: Elastic Container Registry to store Docker images
 
+Policies:
 
-## About MLflow & DVC
+AmazonEC2FullAccess
 
-MLflow
+AmazonEC2ContainerRegistryFullAccess
 
- - Its Production Grade
- - Trace all of your expriements
- - Logging & taging your model
+### 3️⃣ Create an ECR Repository
 
+Example URI:
+```bash
+566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
+```
+### 4️⃣ Create an EC2 Instance (Ubuntu)
+### 5️⃣ Install Docker on EC2
+```bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
+### 6️⃣ Configure EC2 as a Self-Hosted GitHub Runner
 
-DVC 
+Go to:
 
- - Its very light weight for POC only
- - light weight expriements tracker
- - It can perform Orchestration (Creating Pipelines)
-
-
- # AWS-CICD-Deployment-with-Github-Actions
-
-## 1. Login to AWS console.
-
-## 2. Create IAM user for deployment
-
-	#with specific access
-
-	1. EC2 access : It is virtual machine
-
-	2. ECR: Elastic Container registry to save your docker image in aws
-
-
-	#Description: About the deployment
-
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
+GitHub Repo → Settings → Actions → Runners → New Self-Hosted Runner
 
 
-# 7. Setup github secrets:
+Then follow the instructions to register and run commands on your EC2 instance.
 
-    AWS_ACCESS_KEY_ID=
+### 7️⃣ Set Up GitHub Secrets
 
-    AWS_SECRET_ACCESS_KEY=
+In your repository settings, add:
+```bash
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=us-east-1
+AWS_ECR_LOGIN_URI=566373416292.dkr.ecr.ap-south-1.amazonaws.com
+ECR_REPOSITORY_NAME=simple-app
+```
+### 🧠 Tools & Technologies
 
-    AWS_REGION = us-east-1
+Python, Scikit-learn, Pandas, NumPy – Model development
 
-    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
+MLflow – Experiment tracking and model management
 
-    ECR_REPOSITORY_NAME = simple-app
+DVC – Data and pipeline versioning
+
+Docker – Containerization for deployment
+
+GitHub Actions – CI/CD automation
+
+AWS EC2/ECR – Cloud-based hosting and image registry
+
+### 💡 Learning Outcomes
+
+Built a production-grade ML pipeline with complete lifecycle management.
+
+Automated model tracking, deployment, and monitoring using MLflow and DVC.
+
+Gained practical experience in MLOps, cloud deployment, and CI/CD engineering.
+
+### 🧑‍💻 Author 
+
+**Mohammad Ibtesum Sakib**  
+📍 Bochum, Germany  
+📧 ibtesum38@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/ibtesum) | [GitHub](https://github.com/Ibtesum-Sakib)
+
+---
+### 🏷️ GitHub Topics
+
+#MachineLearning #MLOps #MLflow #DVC #AWS #CICD #Python #DataScience #Automation
